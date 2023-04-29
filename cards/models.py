@@ -3,6 +3,7 @@ from django.db import models
 
 class CardSets(models.Model):
     set_name = models.CharField(max_length=100)
+    set_description = models.CharField(max_length=200, default="")
 
 NUM_BOXES = 5
 BOXES = range(1, NUM_BOXES + 1)
