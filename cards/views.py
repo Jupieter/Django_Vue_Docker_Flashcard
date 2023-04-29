@@ -13,7 +13,7 @@ class CardListView(ListView):
 
 class CardCreateView(CreateView):
     model = Card
-    fields = ["question", "answer", "box"]
+    fields = ["card_set", "question", "answer", "box"]
     success_url = reverse_lazy("card-create")
 
 
