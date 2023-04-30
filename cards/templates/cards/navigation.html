@@ -1,6 +1,6 @@
 <!DOCTYPE htm>
 {% load cards_tags %}
 <nav>
-    <a href="{% url 'cards:set_change' %}">🗂️ All Cards</a>
+    <a href="{% url 'cards:set_change' %}">🗂️ All {{card_list.0.card_set}} Cards</a>
     {% boxes_as_links %}
 </nav>

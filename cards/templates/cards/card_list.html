@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2>
-        All Cards
+        All {{card_list.0.card_set}} Cards
     </h2>
     <a href="{% url 'cards:card-create' %}" role="button">
         ✨ Create New Card

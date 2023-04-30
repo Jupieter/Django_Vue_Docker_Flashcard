@@ -12,10 +12,7 @@ def set_change(request):
         if form.is_valid():
             choice = form.save(commit=False)
             pk = choice.card_set.id
-            print(type(pk), pk)
-            a_dress = 'cards/' + str(pk)
-            context = {'pk': pk, 'choice': choice.card_set}
-            return redirect('cards:set-list', pk=pk  )
+            return redirect('cards:set-list', pk=pk,  )
         else:
             context = {'choice': "Fault"}
             return render(request, 'cards:set-list', context )
