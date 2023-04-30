@@ -1,0 +1,19 @@
+<!DOCTYPE htm>
+{% extends "cards/base.html" %}
+
+{% block content %}
+<h1>Choose</h1>
+
+<div class="input-group mb-3">
+    
+    <form method="POST" class="post-form">{% csrf_token %}
+        <h4>{{form}}</h4>
+        <button id="submit" type="submit" class="save btn btn-primary">Save Set</button>
+        <a href="{% url 'cards:card-list' %}">
+            <button type="button" class="btn btn-primary">
+                All set
+            </button>
+        </a>
+    </form>
+</div>
+{% endblock %}
