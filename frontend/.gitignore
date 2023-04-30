@@ -1,12 +1,4 @@
-*.pyc
-*~
-__pycache__
-venv
-db.sqlite3
-/django
 .DS_Store
-*.bat
-
 node_modules
 /dist
 
