@@ -1,6 +1,6 @@
 <!-- filename: TasksItem.vue -->
 <template>
-    <div class="add_task">
+    <div class="form">
         <form v-on:submit.prevent="submitForm">
             <div class="form-group">
                 <label for="title">Title</label>

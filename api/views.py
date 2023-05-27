@@ -4,10 +4,12 @@ from django.shortcuts import render
 from rest_framework.parsers import JSONParser
 # To bypass having a CSRF token
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
 # for sending response to the client
 from django.http import HttpResponse, JsonResponse
+from rest_framework.response import Response
 # API definition for card_set
-from .serializers import CardSetSerializer
+from .serializers import CardSetSerializer, CardSetPostSerializer
 # CardSets model
 from cards.models import CardSets
 
@@ -20,9 +22,7 @@ def card_set(request):
     if(request.method == 'GET'):
         # get all the card_set
         card_set = CardSets.objects.all()
-        # serialize the card_set data
         serializer = CardSetSerializer(card_set, many=True)
-        # return a Json response
         return JsonResponse(serializer.data,safe=False)
     
     elif(request.method == 'POST'):
@@ -40,3 +40,15 @@ def card_set(request):
         #    return JsonResponse(serializer.data, status=201)
             # provide a Json Response with the necessary error information
         # return JsonResponse(serializer.errors, status=400)
+
+@api_view(['POST'])
+def create_card_set(request):
+    data=request.data
+    err = "error"
+    print(data)
+    serializer = CardSetPostSerializer(data=request.data)
+    print(serializer)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
+    return Response(err, status=400)

@@ -6,3 +6,9 @@ class CardSetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CardSets
         fields = ['id', 'set_name', 'set_description']
+
+
+class CardSetPostSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CardSets
+        fields = ['set_name', 'set_description']
