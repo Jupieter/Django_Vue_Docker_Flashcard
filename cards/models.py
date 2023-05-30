@@ -4,6 +4,7 @@ from django.db import models
 class CardSets(models.Model):
     set_name = models.CharField(max_length=100)
     set_description = models.CharField(max_length=200, default="")
+    checked = models.BooleanField(default=0)
     def __str__(self):
         return  self.set_name
 
