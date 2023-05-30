@@ -60,6 +60,18 @@ def delete_card_set(request, pk):
         card_set = CardSets.objects.get(pk=pk)
         print(card_set)
         card_set.delete()
-        return Response(status=204)  # Sikeres törlés, üres válasz (No Content)
+        return Response({'message': 'Checked value deleted successfully.'}, status=204)  # Sikeres törlés, üres válasz (No Content)
     except CardSets.DoesNotExist:
-        return Response(status=404)  # Nem található az adott ID-val rendelkező rekord
+        return Response({'message': 'CardSets not found.'},status=404)  # Nem található az adott ID-val rendelkező 
+
+@api_view(['POST'])
+def cardset_checked_view(request, pk):
+    print("pk:  ", pk)
+    try:
+        card_set = CardSets.objects.get(pk=pk)
+        print(card_set)
+        card_set.checked = not card_set.checked  # Toggle the checked value
+        card_set.save()
+        return Response({'message': 'Checked value updated successfully.'})
+    except CardSets.DoesNotExist:
+        return Response({'message': 'CardSets not found.'}, status=404)
