@@ -63,22 +63,31 @@
             <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#addSetModal">New</button>
             </h1>
             <ul class="list-group">
-                <li v-for="task in tasks" :key="task.id" class="card">
+                <li v-for="card_set in tasks" :key="card_set.id" class="card">
                 <div class="card-header bg-gray border-sdarkgrey">
                     <div class="row">
                     <div class="col-1 d-flex justify-content-center">
-                        <input type="checkbox" v-model="task.checked" @change="updateCheckedStatus(task)">
+                        <input type="checkbox" v-model="card_set.checked" @change="updateCheckedStatus(card_set)">
                     </div>
                     <div class="col-9 d-flex justify-content-start">
-                        <h5 class="card-title">{{ task.id}} - {{ task.set_name }}</h5>
+                        <h5 class="card-title">{{ card_set.id}} - {{ card_set.set_name }}</h5>
                     </div>
-                    <div class="col-2 d-flex justify-content-end">
-                        <button class="btn btn-danger" type="button" @click="deleteTask(task)">Del</button>
+                    <div class="col-1 d-flex justify-content-end">
+                        <button class="btn btn-danger" type="button" @click="updateSet(card_set)">
+                            C<i class="fa-regular fa-pen"></i>
+                            <!-- <font-awesome-icon :icon="['far', 'trash']" /> -->
+                        </button>
+                    </div>
+                    <div class="col-1 d-flex justify-content-end">
+                        <button class="btn btn-danger" type="button" @click="deleteSet(card_set)">
+                            D<i class="fa-regular fa-trash"></i>
+                            <!-- <font-awesome-icon :icon="['far', 'trash']" /> -->
+                        </button>
                     </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <p>{{ task.set_description}}</p>
+                    <p>{{ card_set.set_description}}</p>
                 </div>
                 </li>
             <br>
@@ -127,8 +136,8 @@
                 console.error(error);
             });
         },
-        deleteTask(task) {
-            const url = `http://127.0.0.1:8000/api/delete_set/${task.id}`;
+        deleteSet(card_set) {
+            const url = `http://127.0.0.1:8000/api/delete_set/${card_set.id}`;
             axios
             .delete(url)
             .then(response => {
@@ -140,8 +149,8 @@
                 console.error(error);
             });
         },
-        updateCheckedStatus(task) {
-            const url = `http://127.0.0.1:8000/api/set_checked/${task.id}`;
+        updateCheckedStatus(card_set) {
+            const url = `http://127.0.0.1:8000/api/set_checked/${card_set.id}`;
             axios
                 .post(url)
                 .then(response => {
