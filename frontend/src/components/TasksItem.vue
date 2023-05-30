@@ -1,9 +1,9 @@
 <!-- filename: TasksItem.vue -->
 <template>
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand" href="#">Your App</a>
+          <a class="navbar-brand" href="#">Flash Card</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -18,16 +18,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#">Select Set</a>
+                <a class="nav-link" href="#">Card Sets</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Select Box</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Select Method</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addSetModal">New</a>
+                <a class="nav-link" href="#">Study</a>
               </li>
             </ul>
           </div>
@@ -64,26 +58,29 @@
       <!-- Card Sets -->
       <div class="container-lg">
         <div class="content">
-          <h1>Card Sets</h1>
-          <ul class="list-group">
-            <li v-for="task in tasks" :key="task.id" class="card">
-              <div class="card-header bg-gray border-sdarkgrey">
-                <div class="row">
-                  <div class="col-1 d-flex justify-content-center">
-                    <input type="checkbox" v-model="selectedTasks" :value="task.id">
-                  </div>
-                  <div class="col-9 d-flex justify-content-start">
-                    <h5 class="card-title">{{ task.id}} - {{ task.set_name }}</h5>
-                  </div>
-                  <div class="col-2 d-flex justify-content-end">
-                    <button class="btn btn-danger" type="button" @click="deleteTask(task)">Del</button>
-                  </div>
+            <h4></h4>
+            <h1>Card Sets 
+            <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#addSetModal">New</button>
+            </h1>
+            <ul class="list-group">
+                <li v-for="task in tasks" :key="task.id" class="card">
+                <div class="card-header bg-gray border-sdarkgrey">
+                    <div class="row">
+                    <div class="col-1 d-flex justify-content-center">
+                        <input type="checkbox" v-model="selectedTasks" :value="task.id">
+                    </div>
+                    <div class="col-9 d-flex justify-content-start">
+                        <h5 class="card-title">{{ task.id}} - {{ task.set_name }}</h5>
+                    </div>
+                    <div class="col-2 d-flex justify-content-end">
+                        <button class="btn btn-danger" type="button" @click="deleteTask(task)">Del</button>
+                    </div>
+                    </div>
                 </div>
-              </div>
-              <div class="card-body">
-                <p>{{ task.set_description}}</p>
-              </div>
-            </li>
+                <div class="card-body">
+                    <p>{{ task.set_description}}</p>
+                </div>
+                </li>
             <br>
           </ul>
         </div>
