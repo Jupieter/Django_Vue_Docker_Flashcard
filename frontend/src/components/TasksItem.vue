@@ -67,7 +67,7 @@
                 <div class="card-header bg-gray border-sdarkgrey">
                     <div class="row">
                     <div class="col-1 d-flex justify-content-center">
-                        <input type="checkbox" v-model="selectedTasks" :value="task.id">
+                        <input type="checkbox" v-model="task.checked" @change="updateCheckedStatus(task)">
                     </div>
                     <div class="col-9 d-flex justify-content-start">
                         <h5 class="card-title">{{ task.id}} - {{ task.set_name }}</h5>
@@ -141,6 +141,18 @@
           });
       }
     },
+    updateCheckedStatus(task) {
+      const url = `http://127.0.0.1:8000/api/set_checked/${task.id}`;
+      axios
+        .post(url)
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+
     created() {
       this.getData();
     }
