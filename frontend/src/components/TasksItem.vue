@@ -101,62 +101,62 @@
       };
     },
     methods: {
-      async getData() {
-        try {
-          const response = await axios.get('http://127.0.0.1:8000/api/all_set/');
-          this.tasks = response.data;
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      submitForm() {
-        const formData = {
-          set_name: this.title,
-          set_description: this.description
-        };
+        async getData() {
+            try {
+            const response = await axios.get('http://127.0.0.1:8000/api/all_set/');
+            this.tasks = response.data;
+            } catch (error) {
+            console.log(error);
+            }
+        },
+        submitForm() {
+            const formData = {
+            set_name: this.title,
+            set_description: this.description
+            };
   
-        axios
-          .post('http://127.0.0.1:8000/api/create_set/', formData)
-          .then(response => {
-            console.log(response.data);
-            this.title = '';
-            this.description = '';
-            this.getData();
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      },
-      deleteTask(task) {
-        const url = `http://127.0.0.1:8000/api/delete_set/${task.id}`;
-        axios
-          .delete(url)
-          .then(response => {
-            console.log(response.data);
-            this.getData();
-            console.log(this.selectedTasks);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    },
-    updateCheckedStatus(task) {
-      const url = `http://127.0.0.1:8000/api/set_checked/${task.id}`;
-      axios
-        .post(url)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
-
-    created() {
-      this.getData();
-    }
-  };
+            axios
+            .post('http://127.0.0.1:8000/api/create_set/', formData)
+            .then(response => {
+                console.log(response.data);
+                this.title = '';
+                this.description = '';
+                this.getData();
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        },
+        deleteTask(task) {
+            const url = `http://127.0.0.1:8000/api/delete_set/${task.id}`;
+            axios
+            .delete(url)
+            .then(response => {
+                console.log(response.data);
+                this.getData();
+                console.log(this.selectedTasks);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        },
+        updateCheckedStatus(task) {
+            const url = `http://127.0.0.1:8000/api/set_checked/${task.id}`;
+            axios
+                .post(url)
+                .then(response => {
+                    console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        });
+            },
+                
+        },
+        created() {
+        this.getData();
+        }
+    };
   </script>
 
 <style>
