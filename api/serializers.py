@@ -5,7 +5,7 @@ from cards.models import CardSets
 class CardSetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = CardSets
-        fields = ['id', 'set_name', 'set_description']
+        fields = ['id', 'set_name', 'set_description', 'checked']
 
 
 class CardSetPostSerializer(serializers.HyperlinkedModelSerializer):
