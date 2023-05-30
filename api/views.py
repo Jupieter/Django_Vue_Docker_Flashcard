@@ -52,3 +52,14 @@ def create_card_set(request):
         serializer.save()
         return Response(serializer.data, status=201)
     return Response(err, status=400)
+
+@api_view(['DELETE'])
+def delete_card_set(request, pk):
+    print("pk:  ", pk)
+    try:
+        card_set = CardSets.objects.get(pk=pk)
+        print(card_set)
+        card_set.delete()
+        return Response(status=204)  # Sikeres törlés, üres válasz (No Content)
+    except CardSets.DoesNotExist:
+        return Response(status=404)  # Nem található az adott ID-val rendelkező rekord
