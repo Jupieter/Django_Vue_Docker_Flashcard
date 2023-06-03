@@ -1,40 +1,40 @@
 <template>
   <!DOCTYPE html>
   <html lang="en">
-    <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    </head>
-    
-    <body>
-      <div id="app">
-        <TasksItem />
-      </div>
-    </body>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+
+  <body>
+    <div id="app">
+      <font-awesome-icon icon="user-secret" />
+      <AppHeader />
+      <CardSets />
+    </div>
+  </body>
+
   </html>
 </template>
 
 
 <script>
-import TasksItem from "./components/TasksItem.vue";
+import CardSets from "./components/CardSets.vue";
+import AppHeader from "./components/AppHeader.vue";
 export default {
   name: "App",
   components: {
-    TasksItem,
+    AppHeader,
+    CardSets,
   },
 };
 </script>
 
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-.selector-for-some-widget {
-  box-sizing: content-box;
-}
+  .df {
+    display: flex;
+    gap: 1rem;
+  }
+
 </style>
