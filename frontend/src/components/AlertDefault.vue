@@ -8,20 +8,20 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-
-            <button type="button" @click="OpenCloseFun()" class="btn-close"></button>
+              <h3>Alert:</h3>
+            <button type="button" @click="CloseFun()" class="btn-close"></button>
           </div>
           <div class="modal-body">
             <slot></slot>
           </div>
           <div class="modal-footer">
-            <button type="button" @click="OpenCloseFun()" :class="'btn btn-' + variant">Close</button>
+            <button type="button" @click="CloseFun()" :class="'btn btn-' + variant">Close</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <button type="button" @click="OpenCloseFun()" :class="'btn btn-' + variant">Open modal</button>
+  <!-- <button type="button" @click="OpenCloseFun()" :class="'btn btn-' + variant">Open modal</button> -->
 </template>
 
 <script>
@@ -33,12 +33,16 @@ export default {
   },
   data() {
     return {
-      OpenClose: this.visible
+      OpenClose: false,
     }
   },
   methods: {
-    OpenCloseFun() {
-      this.OpenClose = !this.OpenClose;
+    OpenFun() {
+      this.visible = true;
+    },
+    CloseFun() {
+      this.OpenClose = false;
+      this.$emit('close');
     },
   },
   watch: {

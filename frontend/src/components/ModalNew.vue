@@ -17,7 +17,7 @@
                   <textarea class="form-control" id="description" v-model="description"></textarea>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
               </form>
@@ -28,12 +28,17 @@
 </template>
 
 <script>
+import axios from 'axios';
+import {ref} from 'vue';
+// const title = ref('');
+// const description = ref('');
+
 export default {
   name: 'ModalNew',
   data() {
     return {
-      title: '',
-      description: '',
+      title: ref(''),
+      description: ref(''),
     };
   },
   methods: {
@@ -41,30 +46,30 @@ export default {
       // Űrlap beküldése és adatok feldolgozása
       // ...
       // Esemény kibocsátása a fő komponens felé
-      
-    //   const formData = {
-    //         set_name: this.title,
-    //         set_description: this.description
-    //         };
-  
-    //         axios
-    //         .post('http://127.0.0.1:8000/api/create_set/', formData)
-    //         .then(response => {
-    //             console.log(response.data);
-    //             this.title = '';
-    //             this.description = '';
-    //             this.getData();
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         });
+      console.log(this.title)  
+      console.log(this.description)  
+      const formData = {
+        set_name: this.title,
+        set_description: this.description
+        };
+
+        // axios
+        // .post('http://127.0.0.1:8000/api/create_set/', formData)
+        // .then(response => {
+        //     console.log(response.data);
+        //     this.title = '';
+        //     this.description = '';
+        // })
+        // .catch(error => {
+        //     console.error(error);
+        // });
 
     //   this.$emit('submit', {
     //     title: this.title,
     //     description: this.description,
     //   });
       // Modális ablak bezárása
-      // this.close();
+      this.close();
     },
     close() {
       this.$emit('close');
