@@ -64,20 +64,17 @@ def delete_card_set(request, pk):
     except CardSets.DoesNotExist:
         return Response({'message': 'CardSets not found.'},status=404)  # Nem található az adott ID-val rendelkező 
 
-@csrf_exempt
+@api_view(['POST'])
 def update_cardset(request, pk):
     try:
         cardset = CardSets.objects.get(pk=pk)
+        print(cardset)
         if request.method == 'POST':
-            set_name = request.POST.get('set_name')
-            set_description = request.POST.get('set_description')
-            checked = request.POST.get('checked')
-
+            set_name = request.data.get('set_name')
+            set_description = request.data.get('set_description')
             cardset.set_name = set_name
             cardset.set_description = set_description
-            cardset.checked = checked
             cardset.save()
-
             return JsonResponse({'message': 'CardSet updated successfully.'})
 
     except CardSets.DoesNotExist:

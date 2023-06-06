@@ -1,7 +1,6 @@
 <!-- filename: CardSets.vue -->
 <template>
-  <!-- <ModalNew v-show="isNewVisible" @submit="handleModalSubmit" @close="closeModalNew" /> -->
-  <ModalNew  />
+  <ModalCardSet v-if="isNewVisible" :cardSet="cardSetData" @close="closeModalNew"/>
   
 
   <!-- <AlertDefault  variant="success" :msg="msg" :visible="visible"> -->
@@ -31,11 +30,13 @@
     <div class="content">
       <h4></h4>
       <h1>{{ isNewVisible }} Card Sets
-        <button class="btn btn-primary" href="#" @click="openModalNew()">Open Modal</button>
-        <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#addSetModal">New</button>
+        <button class="btn btn-primary" href="#" @click="openModalNew()">
+          <font-awesome-icon :icon="['fas', 'plus']" />
+        </button>
       </h1>
       <ul class="list-group">
         <li v-for="card_set in tasks" :key="card_set.id" class="card mb-3 custom-gradient">
+          {{ card_set }}
           <div class="card-header bg-gray border-sdarkgrey">
             <div class="row">
               <div class="col-1 text-center">
@@ -49,7 +50,7 @@
               </div>
               <div class="col-3">
                 <div class="btn-group ">
-                  <button class="btn btn-secondary me-2" type="button" @click="updateSet(card_set)">
+                  <button class="btn btn-secondary me-2" type="button" @click="openModalSetOrNew(card_set)">
                     <font-awesome-icon :icon="['fas', 'pen']" />
                   </button>
 
@@ -72,7 +73,7 @@
   
 <script>
 import axios from 'axios';
-import ModalNew from './ModalNew.vue';
+import ModalCardSet from './ModalCardSet.vue';
 import ModalTest from './ModalTest.vue';
 import AlertDefault from './AlertDefault.vue';
 
@@ -81,13 +82,9 @@ export default {
   name: "CardSets",
   components: {
     AlertDefault,
-    ModalNew,
+    ModalCardSet,
     ModalTest,
   },
-  // props: {
-  //   msg: String,
-  //   visible: Boolean,
-  // },
   data() {
     return {
       isAlertVisible: false,
@@ -96,29 +93,38 @@ export default {
       selectedTasks: [],
       isTestVisible: false,
       modalData: null,
+      cardSetData: null,
     };
   },
+
   methods: {
     async getData() {
       try {
+        console.log("getData");
         const response = await axios.get('http://127.0.0.1:8000/api/all_set/');
         this.tasks = response.data;
       } catch (error) {
         console.log(error);
       }
     },
+
+
+
+
     openModalNew() {
-      // this.isNewVisible = true;
-      console.log("Modal open");
-      this.isNewVisible = true;
+      console.log("New open");
+      const card_set = {
+        id: null,
+        set_name: "",
+        set_description: "",
+        checked: "false"
+      }
+      this.openModalSetOrNew(card_set)
     },
-    handleModalSubmit(data) {
-      // Új adatok feldolgozása
-      console.log(data);
-      this.getData();
-      // ...
-      // Modális ablak bezárása
-      // this.closeModal();
+    openModalSetOrNew(card_set) {
+      console.log("Set or New open");
+      this.cardSetData = card_set
+      this.isNewVisible = true;
     },
     closeModalNew() {
       this.getData();
@@ -161,20 +167,7 @@ export default {
           console.error(error);
         });
     },
-    updateSet(card_set) {
-      const url = `http://127.0.0.1:8000/api/set_updated/${card_set.id}`;
-      console.log(card_set);
 
-      axios
-        .put(url, card_set)
-        .then(response => {
-          console.log(response.data);
-          this.getData();
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
     updateCheckedStatus(card_set) {
       const url = `http://127.0.0.1:8000/api/set_checked/${card_set.id}`;
       axios
