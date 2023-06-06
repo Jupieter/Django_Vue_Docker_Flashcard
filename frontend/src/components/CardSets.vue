@@ -1,7 +1,7 @@
 <!-- filename: CardSets.vue -->
 <template>
-  <ModalCardSet v-if="isNewVisible" :cardSet="cardSetData" @close="closeModalNew"/>
-  
+  <ModalCardSet v-if="isNewVisible" :cardSet="cardSetData" @close="closeModalNew" />
+
 
   <!-- <AlertDefault  variant="success" :msg="msg" :visible="visible"> -->
   <!-- <p class="text-center">{{ msg }}</p> -->

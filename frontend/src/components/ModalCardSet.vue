@@ -71,10 +71,10 @@ export default {
       };
       let url = `http://127.0.0.1:8000/api/set_updated/${this.cardSet.id}`;
       axios
-      .post(url, formData)
-      .then(response => {
+        .post(url, formData)
+        .then(response => {
           console.log(response.data.message);
-          if (response) {this.close()};
+          if (response) { this.close() };
         })
         .catch(error => {
           console.error(error);
