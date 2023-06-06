@@ -54,7 +54,7 @@
                     <font-awesome-icon :icon="['fas', 'pen']" />
                   </button>
 
-                  <button class="btn btn-danger " type="button" @click="deleteSet(card_set)">
+                  <button class="btn btn-danger " type="button" @click="confirmDelete(card_set)">
                     <font-awesome-icon :icon="['fas', 'trash']" />
                   </button>
                 </div>
@@ -153,6 +153,11 @@ export default {
       this.isTestVisible = false;
     },
 
+    confirmDelete(card_set) {
+      if (confirm('Are you sure you want to delete it?')) {
+        this.deleteSet(card_set);
+      }
+    },
 
     deleteSet(card_set) {
       const url = `http://127.0.0.1:8000/api/delete_set/${card_set.id}`;
