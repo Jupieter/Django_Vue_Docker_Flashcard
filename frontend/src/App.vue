@@ -9,7 +9,8 @@
   <body>
     <div id="app">
       <AppHeader />
-      <CardSets />
+      <router-view></router-view>
+      <!-- <CardSets /> -->
     </div>
   </body>
 

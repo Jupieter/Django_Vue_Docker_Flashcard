@@ -1,11 +1,11 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import CardSet from "./components/CardSets.vue"
-import CardSet from "./pages/GamesMain.vue"
+import GamesMain from "./pages/GamesMain.vue"
 
 const routes = [
-  { path: '/', component: Welcome },
-  { path: '/cardset', component: CardSet},
-  { path: '/study', component: CardSet},
+  // { path: '/', component: Welcome, name: 'Welcome' },
+  { path: '/cardset', component: CardSet, name:'CardSet'},
+  { path: '/study', component: GamesMain},
 ]
 
 const router = createRouter({

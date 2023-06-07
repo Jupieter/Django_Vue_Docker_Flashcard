@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import router from './router'
 
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
@@ -16,5 +17,6 @@ import { faTrash, faPen, faPlus, faUserSecret } from '@fortawesome/free-solid-sv
 library.add(faTrash, faPen, faPlus, faUserSecret)
 
 createApp(App)
+.use(router)
 .component('font-awesome-icon', FontAwesomeIcon)
 .mount('#app')
