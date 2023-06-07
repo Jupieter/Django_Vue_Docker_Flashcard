@@ -104,7 +104,8 @@ export default {
     async getData() {
       try {
         console.log("getData");
-        const response = await axios.get('http://127.0.0.1:8000/api/all_set/');
+        // const response = await axios.get('http://127.0.0.1:8000/api/all_set/');
+        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}all_set/`);
         this.tasks = response.data;
       } catch (error) {
         console.log(error);
@@ -163,12 +164,12 @@ export default {
     },
 
     deleteSet(card_set) {
-      const url = `http://127.0.0.1:8000/api/delete_set/${card_set.id}`;
+      const url = `${import.meta.env.VITE_APP_API_URL}delete_set/${card_set.id}`;
       axios
         .delete(url)
         .then(response => {
           console.log(response.data);
-          this.getData();
+          if (response) {  this.getData() };
           console.log(this.selectedTasks);
         })
         .catch(error => {
@@ -177,7 +178,7 @@ export default {
     },
 
     updateCheckedStatus(card_set) {
-      const url = `http://127.0.0.1:8000/api/set_checked/${card_set.id}`;
+      const url = `${import.meta.env.VITE_APP_API_URL}set_checked/${card_set.id}`;
       axios
         .post(url)
         .then(response => {

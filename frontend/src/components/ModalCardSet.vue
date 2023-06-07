@@ -50,7 +50,7 @@ export default {
         set_description: this.cardSet.set_description
       };
       axios
-        .post('http://127.0.0.1:8000/api/create_set/', formData)
+        .post(`${import.meta.env.VITE_APP_API_URL}create_set/`, formData)
         .then(response => {
           console.log(response.data.message);
           this.cardSet.set_name = '';
@@ -69,7 +69,7 @@ export default {
         set_name: this.cardSet.set_name,
         set_description: this.cardSet.set_description
       };
-      let url = `http://127.0.0.1:8000/api/set_updated/${this.cardSet.id}`;
+      let url = `${import.meta.env.VITE_APP_API_URL}set_updated/${this.cardSet.id}`;
       axios
         .post(url, formData)
         .then(response => {
