@@ -8,7 +8,6 @@
 
   <body>
     <div id="app">
-      <font-awesome-icon icon="user-secret" />
       <AppHeader />
       <CardSets />
     </div>

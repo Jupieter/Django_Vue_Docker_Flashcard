@@ -169,7 +169,7 @@ export default {
         .delete(url)
         .then(response => {
           console.log(response.data);
-          if (response) {  this.getData() };
+          if (response) { this.getData() };
           console.log(this.selectedTasks);
         })
         .catch(error => {
