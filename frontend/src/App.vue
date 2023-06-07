@@ -19,7 +19,7 @@
 
 
 <script>
-import CardSets from "./components/CardSets.vue";
+import CardSets from "./pages/CardSets.vue";
 import AppHeader from "./components/AppHeader.vue";
 export default {
   name: "App",

@@ -76,9 +76,9 @@
   
 <script>
 import axios from 'axios';
-import ModalCardSet from './ModalCardSet.vue';
-import ModalTest from './ModalTest.vue';
-import AlertDefault from './AlertDefault.vue';
+import ModalCardSet from '../components/ModalCardSet.vue';
+import ModalTest from '../components//ModalTest.vue';
+import AlertDefault from '../components//AlertDefault.vue';
 
 
 export default {

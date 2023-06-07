@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import CardSet from "./components/CardSets.vue"
+import CardSet from "./pages/CardSets.vue"
 import GamesMain from "./pages/GamesMain.vue"
 
 const routes = [
