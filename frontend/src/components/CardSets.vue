@@ -6,8 +6,8 @@
   <!-- <AlertDefault  variant="success" :msg="msg" :visible="visible"> -->
   <!-- <p class="text-center">{{ msg }}</p> -->
   <!-- </AlertDefault> -->
-  <div class="row">
-    <div>
+  <div class="d-flex flex-row justify-content-between">
+    <div class="p-2">
       <AlertDefault variant="success" :visible="isAlertVisible" @close="closeModalAlert">
         Test 1
       </AlertDefault>
@@ -16,7 +16,7 @@
       </button>
       {{ isAlertVisible }}
     </div>
-    <div>
+    <div class="p-2">
       <!-- <ModalTest :isVisible="isTestVisible" :data="modalData" @close="closeModalTest" /> -->
       <ModalTest v-if="isTestVisible" :data="modalData" @close="closeModalTest" />
       <button class="btn btn-secondary" @click="openModalTest('Hello')" @close="closeModalTest">
@@ -25,30 +25,33 @@
       {{ isTestVisible }}
     </div>
   </div>
+
+
   <!-- Card Sets -->
   <div class="container-lg">
     <div class="content">
       <h4></h4>
-      <h1>{{ isNewVisible }} Card Sets
+      <h1>Card Sets
         <button class="btn btn-primary" href="#" @click="openModalNew()">
           <font-awesome-icon :icon="['fas', 'plus']" />
         </button>
       </h1>
+
       <ul class="list-group">
         <li v-for="card_set in tasks" :key="card_set.id" class="card mb-3 custom-gradient">
           {{ card_set }}
           <div class="card-header bg-gray border-sdarkgrey">
-            <div class="row">
-              <div class="col-1 text-center">
+            <div class="d-flex flex-row justify-content-between">
+              <div class="p-2">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" v-model="card_set.checked"
                     @change="updateCheckedStatus(card_set)">
                 </div>
               </div>
-              <div class="col-8">
+              <div class="p-2">
                 <h5 class="card-title">{{ card_set.id }} - {{ card_set.set_name }}</h5>
               </div>
-              <div class="col-3">
+              <div class="p-2">
                 <div class="btn-group ">
                   <button class="btn btn-secondary me-2" type="button" @click="openModalSetOrNew(card_set)">
                     <font-awesome-icon :icon="['fas', 'pen']" />
