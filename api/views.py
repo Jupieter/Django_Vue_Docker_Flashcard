@@ -1,15 +1,23 @@
-from django.shortcuts import render
+from rest_framework import permissions, status
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from knox.views import LoginView as KnoxLoginView, LogoutView as KnoxLogoutView
+from knox.models import AuthToken
+from django.contrib.auth import get_user_model
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
+from django.shortcuts import render
 # parsing data from the client
 from rest_framework.parsers import JSONParser
 # To bypass having a CSRF token
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.decorators import api_view
 # for sending response to the client
-from django.http import HttpResponse, JsonResponse
-from rest_framework.response import Response
+from django.http import JsonResponse
 # API definition for card_set
-from .serializers import CardSetSerializer, CardSetPostSerializer
+from .serializers import CardSetSerializer, CardSetPostSerializer, UserSerializer
 # CardSets model
 from cards.models import CardSets
 
@@ -24,22 +32,6 @@ def card_set(request):
         card_set = CardSets.objects.all()
         serializer = CardSetSerializer(card_set, many=True)
         return JsonResponse(serializer.data,safe=False)
-    
-    elif(request.method == 'POST'):
-        # parse the incoming information
-        print("request --->", request)
-        data = JSONParser().parse(request)
-        # print(data)
-        # instanciate with the serializer
-        # serializer = CardSetSerializer(data=data)
-        # check if the sent information is okay
-        # if(serializer.is_valid()):
-            # if okay, save it on the database
-        #    serializer.save()
-            # provide a Json Response with the data that was saved
-        #    return JsonResponse(serializer.data, status=201)
-            # provide a Json Response with the necessary error information
-        # return JsonResponse(serializer.errors, status=400)
 
 @api_view(['POST'])
 def create_card_set(request):
@@ -93,3 +85,39 @@ def cardset_checked_view(request, pk):
         return Response({'message': 'Checked value updated successfully.'})
     except CardSets.DoesNotExist:
         return Response({'message': 'CardSets not found.'}, status=404)
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def register(request):
+    serializer = UserSerializer(data=request.data)
+    if serializer.is_valid():
+        email = serializer.validated_data['email']
+        password = make_password(serializer.validated_data['password'])
+        user = User.objects.create(username=serializer.validated_data['username'], email=email, password=password)
+        _, token = AuthToken.objects.create(user)
+        return Response({'user': UserSerializer(user).data, 'token': token}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LoginView(KnoxLoginView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        # username = request.data.get('username')
+        username = request.data.get('username')
+        password = request.data.get('password')
+        print(username)
+        print(password)
+        user = authenticate(request, username=username, password=password)
+        print(user.id)
+        if user is not None:
+            login(request, user)
+            return super().post(request, format=None)
+        return Response({'error': 'Invalid username or password.'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(KnoxLogoutView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, format=None):
+        logout(request)
+        return super().post(request, format=None)

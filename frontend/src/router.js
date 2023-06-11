@@ -1,9 +1,10 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import CardSet from "./pages/CardSets.vue"
 import GamesMain from "./pages/GamesMain.vue"
+import WelcomeMain from "./pages/WelcomeMain.vue"
 
 const routes = [
-  // { path: '/', component: Welcome, name: 'Welcome' },
+  { path: '/', component: WelcomeMain, name: 'WelcomeMain' },
   { path: '/cardset', component: CardSet, name:'CardSet'},
   { path: '/study', component: GamesMain},
 ]

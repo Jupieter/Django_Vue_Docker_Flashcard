@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "cards.apps.CardsConfig",
     "rest_framework",
+    "knox",
     "corsheaders" 
 ]
 
@@ -75,6 +76,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'flashcards.wsgi.application'
 CORS_ALLOW_ALL_ORIGINS = True
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

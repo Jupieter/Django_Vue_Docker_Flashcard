@@ -79,6 +79,8 @@ import axios from 'axios';
 import ModalCardSet from '../components/ModalCardSet.vue';
 import ModalTest from '../components//ModalTest.vue';
 import AlertDefault from '../components//AlertDefault.vue';
+import { useUserStore } from '../../stores/user'
+
 
 
 export default {
