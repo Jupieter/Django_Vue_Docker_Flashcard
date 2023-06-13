@@ -1,25 +1,21 @@
 from rest_framework import permissions, status
+from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.serializers import AuthTokenSerializer
-from knox.views import LoginView as KnoxLoginView, LogoutView as KnoxLogoutView
-from knox.models import AuthToken
-from knox.auth import TokenAuthentication
-from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from knox.views import LoginView as KnoxLoginView, LogoutView as KnoxLogoutView
+from knox.models import AuthToken
+from knox.auth import TokenAuthentication
 
 from django.shortcuts import render
-# parsing data from the client
-from rest_framework.parsers import JSONParser
-# To bypass having a CSRF token
 from django.views.decorators.csrf import csrf_exempt
-# for sending response to the client
 from django.http import JsonResponse
-# API definition for card_set
 from .serializers import CardSetSerializer, CardSetPostSerializer, UserSerializer
-# CardSets model
 from cards.models import CardSets
 
 
@@ -35,6 +31,8 @@ def card_set(request):
         return JsonResponse(serializer.data,safe=False)
 
 @api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def create_card_set(request):
     data=request.data
     err = "error"
@@ -47,6 +45,8 @@ def create_card_set(request):
     return Response(err, status=400)
 
 @api_view(['DELETE'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def delete_card_set(request, pk):
     print("pk:  ", pk)
     try:
@@ -58,6 +58,8 @@ def delete_card_set(request, pk):
         return Response({'message': 'CardSets not found.'},status=404)  # Nem található az adott ID-val rendelkező 
 
 @api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def update_cardset(request, pk):
     try:
         cardset = CardSets.objects.get(pk=pk)
@@ -77,6 +79,7 @@ def update_cardset(request, pk):
 
 @api_view(['POST'])
 @authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def cardset_checked_view(request, pk):
     print("pk:  ", pk)
     try:

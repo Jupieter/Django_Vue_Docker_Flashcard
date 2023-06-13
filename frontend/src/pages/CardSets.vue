@@ -100,7 +100,7 @@ export default {
       userData: {}
     };
   },
-  
+
   methods: {
     async getData() {
       try {
@@ -163,11 +163,12 @@ export default {
 
     deleteSet(card_set) {
       this.userData = useUserStore();
+      console.log('this.userData:  ', this.userData.token);
       const url = `${import.meta.env.VITE_APP_API_URL}delete_set/${card_set.id}`;
       axios
-      .delete(url, null, {
+        .delete(url, {
           headers: {
-            Authorization: `Token ${userData.token}`, // Add a token to the Authorization header
+            Authorization: `Token ${this.userData.token}`, 
           },
         })
         .then(response => {
@@ -178,16 +179,16 @@ export default {
         .catch(error => {
           console.error(error);
         });
-      },
-      
-      updateCheckedStatus(card_set) {
+    },
+
+    updateCheckedStatus(card_set) {
       this.userData = useUserStore();
       console.log('this.userData:  ', this.userData.token);
       const url = `${import.meta.env.VITE_APP_API_URL}set_checked/${card_set.id}`;
       axios
         .post(url, null, {
           headers: {
-            Authorization: `Token ${this.userData.token}`, // Add a token to the Authorization header
+            Authorization: `Token ${this.userData.token}`, 
           },
         })
         .then(response => {

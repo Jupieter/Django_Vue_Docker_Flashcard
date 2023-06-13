@@ -30,27 +30,33 @@
 
 <script>
 import axios from 'axios';
-import { ref } from 'vue';
+import { useUserStore } from '../../stores/user'
 
 export default {
   name: 'ModalCardSet',
   props: {
     cardSet: Object,
   },
-  // data() {
-  //   return {
-  //     title: ref(''),
-  //     description: ref(''),
-  //   };
-  // },
+
+  data() {
+    return {
+      userData: {}
+    };
+  },
+
   methods: {
     submitNewForm() {
+      this.userData = useUserStore();
       const formData = {
         set_name: this.cardSet.set_name,
         set_description: this.cardSet.set_description
       };
       axios
-        .post(`${import.meta.env.VITE_APP_API_URL}create_set/`, formData)
+        .post(`${import.meta.env.VITE_APP_API_URL}create_set/`, formData, {
+          headers: {
+            Authorization: `Token ${this.userData.token}`, // Add a token to the Authorization header
+          },
+        })
         .then(response => {
           console.log(response.data.message);
           this.cardSet.set_name = '';
@@ -65,13 +71,18 @@ export default {
     },
 
     submitSetForm() {
+      this.userData = useUserStore();
       let formData = {
         set_name: this.cardSet.set_name,
         set_description: this.cardSet.set_description
       };
       let url = `${import.meta.env.VITE_APP_API_URL}set_updated/${this.cardSet.id}`;
       axios
-        .post(url, formData)
+        .post(url, formData, {
+          headers: {
+            Authorization: `Token ${this.userData.token}`, // Add a token to the Authorization header
+          },
+        })
         .then(response => {
           console.log(response.data.message);
           if (response) { this.close() };
