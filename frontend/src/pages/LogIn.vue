@@ -108,7 +108,7 @@ form {
 }
 
 svg {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 input {

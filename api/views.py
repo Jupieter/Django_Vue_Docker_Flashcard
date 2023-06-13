@@ -2,8 +2,9 @@ from rest_framework import permissions, status
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView, LogoutView as KnoxLogoutView
 from knox.models import AuthToken
+from knox.auth import TokenAuthentication
 from django.contrib.auth import get_user_model
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
@@ -75,6 +76,7 @@ def update_cardset(request, pk):
     return JsonResponse({'error': 'Invalid request method.'})
 
 @api_view(['POST'])
+@authentication_classes([TokenAuthentication])
 def cardset_checked_view(request, pk):
     print("pk:  ", pk)
     try:

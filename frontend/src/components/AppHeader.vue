@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from '../../stores/user'
-import router from '../router'
+import router from '../router.js'
 import axios from 'axios';
 const loginData = JSON.parse(localStorage.getItem('userData')) || { expiry: null, token: null, isLogin: false }
 console.log('loginData', loginData.isLogin)
@@ -12,7 +12,7 @@ function logOut() {
   axios
     .post(url, null, {
       headers: {
-        Authorization: `Token ${userData.token}`, // Token hozzáadása az Authorization fejléchez
+        Authorization: `Token ${userData.token}`, // Add a token to the Authorization header
       },
     })
     .then(response => {

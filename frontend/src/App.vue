@@ -1,7 +1,7 @@
 <script setup>
 import AppHeader from "./components/AppHeader.vue";
 import { useUserStore } from '../stores/user'
-
+import router from './router.js'
 
 const loginData = JSON.parse(localStorage.getItem('userData')) || { expiry: null, token: null, isLogin: false }
 const userData = useUserStore()
@@ -13,9 +13,8 @@ console.log('AppVue isLogin:  ', userData.isLogin)
 const isLastApiCallRecent =
   new Date(loginData.expiry).getTime() - new Date().getTime()
 console.log('AppVue Date:  ', isLastApiCallRecent)
-if (isLastApiCallRecent > (1000 * 60 * 10) ) {
+if (isLastApiCallRecent > (1000 * 60 * 10)) {
   userData.isLogin = true;
-  router.push('/main')
 } else {
   userData.isLogin = false;
 }
@@ -43,8 +42,9 @@ const MyComponent = {
   <body>
     <div id="app">
       <AppHeader />
-      <router-view></router-view>
-      <!-- <CardSets /> -->
+      <main>
+        <router-view></router-view>
+      </main>
     </div>
   </body>
 
@@ -57,4 +57,8 @@ const MyComponent = {
   display: flex;
   gap: 1rem;
 }
+main {
+    padding: 10vh 0.5rem 22vh 0.5rem;
+    overflow: scroll;
+  }
 </style>
