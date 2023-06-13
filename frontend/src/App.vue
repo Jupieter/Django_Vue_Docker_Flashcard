@@ -3,11 +3,23 @@ import AppHeader from "./components/AppHeader.vue";
 import { useUserStore } from '../stores/user'
 
 const loginData = JSON.parse(localStorage.getItem('userData')) || { expiry: null, token: null, isLogin: false }
-console.log('loginData', loginData.isLogin)
 const userData = useUserStore()
 userData.expiry = (loginData.isLogin ? loginData.expiry : "")
 userData.token = (loginData.isLogin ? loginData.token : "")
-userData.isLogin = (loginData.isLogin ? loginData.isLogin :false)
+userData.isLogin = loginData.isLogin
+console.log('AppVue isLogin:  ', userData.isLogin)
+
+const isLastApiCallRecent =
+  new Date(loginData.expiry).getTime() - new Date().getTime()
+console.log('AppVue Date:  ', isLastApiCallRecent)
+if (isLastApiCallRecent > (1000 * 60 * 10) ) {
+  userData.isLogin = true;
+} else {
+  userData.isLogin = false;
+}
+
+
+console.log('loginData', loginData.isLogin)
 
 const MyComponent = {
   name: 'MyComponent',
