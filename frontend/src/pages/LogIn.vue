@@ -13,7 +13,7 @@ const waitingForServerResponse = ref(false)
 
 if (!userData.isLogin) {
   logIn()
-} else { router.push('/main') }
+} else { router.push('/') }
 
 function logIn() {
   if (!username.value || !pass.value) {

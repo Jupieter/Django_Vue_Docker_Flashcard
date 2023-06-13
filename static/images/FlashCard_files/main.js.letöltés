@@ -1,0 +1,23 @@
+import { createApp } from "/node_modules/.vite/deps/vue.js?v=fa4281ae"
+import { createPinia } from "/node_modules/.vite/deps/pinia.js?v=fa4281ae"
+import "/src/style.css"
+import App from "/src/App.vue?t=1686657931067"
+import router from "/src/router.js?t=1686657860978"
+
+// Import Bootstrap and BootstrapVue CSS files (order is important)
+import "/node_modules/bootstrap/dist/css/bootstrap.css"
+import "/node_modules/.vite/deps/bootstrap_dist_js_bootstrap__js.js?v=fa4281ae"
+
+
+import { library } from "/node_modules/.vite/deps/@fortawesome_fontawesome-svg-core.js?v=fa4281ae";
+import { FontAwesomeIcon } from "/node_modules/.vite/deps/@fortawesome_vue-fontawesome.js?v=fa4281ae";
+// import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+import { faTrash, faPen, faPlus, faSpinner, faUserAstronaut, faUserSecret } from "/node_modules/.vite/deps/@fortawesome_free-solid-svg-icons.js?v=fa4281ae"
+
+library.add(faTrash, faPen, faPlus, faSpinner, faUserAstronaut,faUserSecret)
+
+createApp(App)
+.use(createPinia())
+.use(router)
+.component('font-awesome-icon', FontAwesomeIcon)
+.mount('#app')

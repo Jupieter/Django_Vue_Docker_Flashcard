@@ -2,6 +2,7 @@
 import AppHeader from "./components/AppHeader.vue";
 import { useUserStore } from '../stores/user'
 
+
 const loginData = JSON.parse(localStorage.getItem('userData')) || { expiry: null, token: null, isLogin: false }
 const userData = useUserStore()
 userData.expiry = (loginData.isLogin ? loginData.expiry : "")
@@ -14,6 +15,7 @@ const isLastApiCallRecent =
 console.log('AppVue Date:  ', isLastApiCallRecent)
 if (isLastApiCallRecent > (1000 * 60 * 10) ) {
   userData.isLogin = true;
+  router.push('/main')
 } else {
   userData.isLogin = false;
 }

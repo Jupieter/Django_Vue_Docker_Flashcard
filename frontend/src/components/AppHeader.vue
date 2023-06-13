@@ -1,11 +1,33 @@
 <script setup>
 import { useUserStore } from '../../stores/user'
-import { ref } from 'vue'
+import router from '../router'
+import axios from 'axios';
 const loginData = JSON.parse(localStorage.getItem('userData')) || { expiry: null, token: null, isLogin: false }
 console.log('loginData', loginData.isLogin)
 
-
 const userData = useUserStore()
+
+function logOut() {
+  const url = `${import.meta.env.VITE_APP_API_URL}logout/`;
+  axios
+    .post(url, null, {
+      headers: {
+        Authorization: `Token ${userData.token}`, // Token hozzáadása az Authorization fejléchez
+      },
+    })
+    .then(response => {
+      console.log(response.data);
+      localStorage.clear();
+      userData.isLogin = false;
+      userData.expiry = ""
+      userData.token = ""
+
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  router.replace('/')
+}
 
 </script>
 
@@ -28,7 +50,7 @@ const userData = useUserStore()
             <a class="nav-link" href="/study">Study</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/login">Log Out</a>
+            <a class="nav-link" href="#" @click="logOut()">Log Out</a>
           </li>
         </ul>
         <img src="../../public/Under_Construction_1.png" class="logo rounded float-end ps-5" alt="Under_Construction">
