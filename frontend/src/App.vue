@@ -1,3 +1,20 @@
+<script setup>
+  // import { useUserStore } from '../stores/user.js'
+  import router from './router'
+  import AppHeader from "./components/AppHeader.vue";
+
+  // const userData = useUserStore()
+  // userData.isLogin = false;
+
+const MyComponent = {
+  name: 'MyComponent',
+  AppHeader,
+};
+
+ 
+</script>
+
+
 <template>
   <!DOCTYPE html>
   <html lang="en">
@@ -18,23 +35,9 @@
 </template>
 
 
-<script>
-import CardSets from "./pages/CardSets.vue";
-import AppHeader from "./components/AppHeader.vue";
-export default {
-  name: "App",
-  components: {
-    AppHeader,
-    CardSets,
-  },
-};
-</script>
-
-
 <style>
-  .df {
-    display: flex;
-    gap: 1rem;
-  }
-
+.df {
+  display: flex;
+  gap: 1rem;
+}
 </style>

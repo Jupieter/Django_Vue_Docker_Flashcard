@@ -1,11 +1,12 @@
 // stores/user.js
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore("user", {
   state: () => {
-    return ({ user: {
+    return {
         expiry: null,
-        token: null
-    } })
+        token: null,
+        isLogin: false,
+    };
   },
-})
+});

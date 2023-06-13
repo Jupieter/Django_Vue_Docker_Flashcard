@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import './style.css'
 import App from './App.vue'
 import router from './router'
-import { createPinia } from 'pinia'
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -17,7 +17,7 @@ import { faTrash, faPen, faPlus, faSpinner, faUserAstronaut, faUserSecret } from
 library.add(faTrash, faPen, faPlus, faSpinner, faUserAstronaut,faUserSecret)
 
 createApp(App)
-.use(router)
 .use(createPinia())
+.use(router)
 .component('font-awesome-icon', FontAwesomeIcon)
 .mount('#app')
