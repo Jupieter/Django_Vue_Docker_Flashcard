@@ -1,17 +1,20 @@
 <script setup>
-  // import { useUserStore } from '../stores/user.js'
-  import router from './router'
-  import AppHeader from "./components/AppHeader.vue";
+import AppHeader from "./components/AppHeader.vue";
+import { useUserStore } from '../stores/user'
 
-  // const userData = useUserStore()
-  // userData.isLogin = false;
+const loginData = JSON.parse(localStorage.getItem('userData')) || { expiry: null, token: null, isLogin: false }
+console.log('loginData', loginData.isLogin)
+const userData = useUserStore()
+userData.expiry = (loginData.isLogin ? loginData.expiry : "")
+userData.token = (loginData.isLogin ? loginData.token : "")
+userData.isLogin = (loginData.isLogin ? loginData.isLogin :false)
 
 const MyComponent = {
   name: 'MyComponent',
   AppHeader,
 };
 
- 
+
 </script>
 
 

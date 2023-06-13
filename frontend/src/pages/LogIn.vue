@@ -9,11 +9,9 @@ const pass = ref('')
 const error = ref('')
 
 const userData = useUserStore()
-
 const waitingForServerResponse = ref(false)
-const loginData = JSON.parse(localStorage.getItem('userData')) || { expiry: null, token: null, isLogin: false }
-console.log('loginData', loginData.isLogin)
-if (!loginData.isLogin) {
+
+if (!userData.isLogin) {
   logIn()
 } else { router.push('/main') }
 
@@ -55,11 +53,11 @@ function logIn() {
     <font-awesome-icon icon="spinner" spin="true" />
   </div>
 
-  <div class="card custom-gradient">
+  <div class="card custom-gradient" v-show="!waitingForServerResponse">
     <div class="card-body">
       <div class="row">
         <div class="col-md-8 offset-md-2">
-          <form class="df" v-on:submit.prevent="logIn()" v-show="!waitingForServerResponse">
+          <form class="df" v-on:submit.prevent="logIn()" >
             <div class="text-center mb-4">
               <font-awesome-icon icon="user-astronaut" class="text-white" style="font-size: 3rem;" />
             </div>
