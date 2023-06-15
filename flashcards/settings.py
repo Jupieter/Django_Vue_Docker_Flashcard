@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     "cards.apps.CardsConfig",
     "rest_framework",
     "knox",
-    "corsheaders" 
+    "corsheaders",
+    "api",
+    "tests"
 ]
 
 MIDDLEWARE = [
@@ -131,3 +133,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# My helps:
+# https://coverage.readthedocs.io/en/6.1.2/install.html
+# https://stackoverflow.com/questions/26082128/improperlyconfigured-you-must-either-define-the-environment-variable-django-set
