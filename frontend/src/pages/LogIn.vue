@@ -72,7 +72,7 @@ function logIn() {
               <input id="form-password" type="password" class="form-control" placeholder="Password" v-model="pass" />
             </div>
 
-            <button v-if=!userData.isLogin type="submit" class="btn btn-success">Belépés</button>
+            <button v-if=!userData.isLogin type="submit" id="btn_login_submit"  class="btn btn-success">Belépés</button>
           </form>
         </div>
       </div>

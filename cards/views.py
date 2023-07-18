@@ -10,10 +10,12 @@ def set_change(request):
     if request.method == "POST":
         form = ChangeSetForm(request.POST)
         if form.is_valid():
+            print("Valid")
             choice = form.save(commit=False)
             pk = choice.card_set.id
             return redirect('cards:set-list', pk=pk,  )
         else:
+            print("Hiba")
             context = {'choice': "Fault"}
             return render(request, 'cards:set-list', context )
         print(context)
