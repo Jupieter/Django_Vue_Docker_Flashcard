@@ -8,3 +8,11 @@ Goal: learn & practice VUE.js
     - to expand the database & Flashcard functions
     - writing REST API-s 
     - use more HTML, CSS, JS, and VUE tool
+
+docker compose up --build
+
+docker build -t jupieter/django_backend .
+docker run -it -v C:\GIT\Django_Vue_App_Flashcard\backend:/app -p 8000:8000 --name django_backend jupieter/django_backend 
+
+docker build -t vite_front .
+docker run -it -v C:\GIT\Django_Vue_App_Flashcard\frontend\src:/app/src -p 5173:5173 --name vite_front vite_front 

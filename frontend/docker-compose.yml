@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    container_name: Vite_frontend
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "5173:5173"
+    command: npm run dev  #--host
+    volumes:
+      - ./pages:/app/pages
+      - ./public:/app/public
+      - ./src:/app/src 
+      - ./stores:/app/stores
+    stdin_open: true
+    tty: true
+      
+# docker-compose up --build --no-recreate

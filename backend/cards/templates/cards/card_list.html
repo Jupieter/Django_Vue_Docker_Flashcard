@@ -7,7 +7,9 @@
         All {{card_list.0.card_set}} Cards
     </h2>
     <a href="{% url 'cards:card-create' %}" role="button">
-        ✨ Create New Card
+        <h4 style="color:black">
+            ✨ Create New Card 
+        </h4>
     </a>
     {% for card in card_list %}
         {% ifchanged %}

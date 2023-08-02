@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-m_!i&_&v%=2woplkhc$6or90ssm7#hd5m3*a)8dk9z_18zks!t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver' ]
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -138,3 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # My helps:
 # https://coverage.readthedocs.io/en/6.1.2/install.html
 # https://stackoverflow.com/questions/26082128/improperlyconfigured-you-must-either-define-the-environment-variable-django-set
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:15000'
+]
